@@ -1,0 +1,9 @@
+data/*.json
+data/*.bak.json
+data/.tmp/
+tmp*/
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+Thumbs.db
