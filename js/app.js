@@ -988,7 +988,7 @@
 
     <div class="strategy-grid">
       ${PW.ideas.STRATEGIES.map(
-        (s) => `<button class="strategy-card ${state.ideaStrategy === s.id ? 'active' : ''}" data-act="strategy" data-id="${s.id}" style="--sc:${s.color}">
+        (s) => `<button class="strategy-card ${state.ideaStrategy === s.id ? 'active' : ''}" data-act="strategy" data-id="${s.id}" aria-pressed="${state.ideaStrategy === s.id}" style="--sc:${s.color}">
           <span class="sc-code">${s.code}</span>
           <span class="sc-label">${s.label}</span>
           <span class="sc-desc">${s.desc}</span>
@@ -1000,14 +1000,14 @@
       <div class="gen-row">
         <span class="gen-label">起点</span>
         <div class="scope-chips">
-          <button class="scope-chip ${state.ideaScope.length === 0 ? 'active' : ''}" data-act="scope-all">全库（${papers.length} 篇）</button>
-          ${papers.map((p) => `<button class="scope-chip ${state.ideaScope.includes(p.id) ? 'active' : ''}" data-act="scope-paper" data-id="${U.esc(p.id)}"><span class="dot" style="--tc:${U.tagColor((p.tags || [])[0] || '')}"></span>${U.esc(paperLabel(p))}</button>`).join('')}
+          <button class="scope-chip ${state.ideaScope.length === 0 ? 'active' : ''}" data-act="scope-all" aria-pressed="${state.ideaScope.length === 0}">全库（${papers.length} 篇）</button>
+          ${papers.map((p) => `<button class="scope-chip ${state.ideaScope.includes(p.id) ? 'active' : ''}" data-act="scope-paper" data-id="${U.esc(p.id)}" aria-pressed="${state.ideaScope.includes(p.id)}"><span class="dot" style="--tc:${U.tagColor((p.tags || [])[0] || '')}"></span>${U.esc(paperLabel(p))}</button>`).join('')}
         </div>
       </div>
       <div class="gen-row">
         <span class="gen-label">数量</span>
         <div class="count-select">
-          ${[2, 3, 5].map((n) => `<button class="${state.ideaCount === n ? 'active' : ''}" data-act="idea-count" data-count="${n}">${n} 条</button>`).join('')}
+          ${[2, 3, 5].map((n) => `<button class="${state.ideaCount === n ? 'active' : ''}" data-act="idea-count" data-count="${n}" aria-pressed="${state.ideaCount === n}">${n} 条</button>`).join('')}
         </div>
         <span class="push" style="flex:1"></span>
         <span class="faint" style="font-size:10.5px">${state.ideaStrategy === 'mix' ? '混合模式会从多种策略里挑互补的组合' : '当前策略：' + PW.ideas.strategyMeta(state.ideaStrategy).label}</span>
@@ -2004,24 +2004,23 @@
     }
     if (act === 'strategy') {
       state.ideaStrategy = el.dataset.id;
-      document.querySelectorAll('.strategy-card').forEach((b) => b.classList.toggle('active', b.dataset.id === state.ideaStrategy));
-      renderIdeas();
+      render();
       return;
     }
     if (act === 'scope-all') {
       state.ideaScope = [];
-      renderIdeas();
+      render();
       return;
     }
     if (act === 'scope-paper') {
       const id = el.dataset.id;
       state.ideaScope = state.ideaScope.includes(id) ? state.ideaScope.filter((x) => x !== id) : [...state.ideaScope, id];
-      renderIdeas();
+      render();
       return;
     }
     if (act === 'idea-count') {
       state.ideaCount = Number(el.dataset.count) || 3;
-      renderIdeas();
+      render();
       return;
     }
     if (act === 'generate') {
