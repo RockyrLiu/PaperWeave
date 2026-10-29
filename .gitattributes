@@ -1,0 +1,9 @@
+* text=auto
+*.bat text eol=crlf
+*.py text
+*.js text
+*.css text
+*.html text
+*.md text
+*.json text
+runtime/** -text
