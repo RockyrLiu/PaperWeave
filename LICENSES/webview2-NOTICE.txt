@@ -1,0 +1,22 @@
+Microsoft Edge WebView2 SDK binaries
+=====================================
+
+The following files are part of the Microsoft Edge WebView2 SDK and are
+copyright (c) Microsoft Corporation:
+
+- runtime/Lib/site-packages/webview/lib/Microsoft.Web.WebView2.Core.dll
+- runtime/Lib/site-packages/webview/lib/Microsoft.Web.WebView2.WinForms.dll
+- runtime/Lib/site-packages/webview/lib/runtimes/win-*/native/WebView2Loader.dll
+
+They are redistributed as part of the pywebview Windows backend, not under
+the MIT license of PaperWeave. Use and redistribution are governed by the
+Microsoft WebView2 SDK license terms:
+
+- https://learn.microsoft.com/microsoft-edge/webview2/
+- https://www.nuget.org/packages/Microsoft.Web.WebView2/
+
+The WebView2 Runtime itself is a separate Microsoft component. On Windows
+10/11 it is normally installed by the system or by another Edge-based
+application; it is not bundled in this project. If the runtime is missing,
+install it from Microsoft:
+https://developer.microsoft.com/microsoft-edge/webview2/

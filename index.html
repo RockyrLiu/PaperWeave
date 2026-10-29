@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PaperWeave · 脉络 — 论文阅读与灵感管理</title>
+  <meta name="description" content="本地优先的论文阅读管理台：结构化总结、论文关联网络、跨论文灵感生成。" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231C1D19'/%3E%3Cpath d='M7 11c5 0 5 5 9 5s5-5 9-5M7 16c5 0 5 5 9 5s5-5 9-5M7 21c5 0 5-5 9-5s5 5 9 5' stroke='%23E8B4A8' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <a class="brand" href="#/overview">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M6 10c6 0 6 6 10 6s6-6 10-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            <path d="M6 16c6 0 6 6 10 6s6-6 10-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" opacity=".72"/>
+            <path d="M6 22c6 0 6-6 10-6s6 6 10 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" opacity=".45"/>
+          </svg>
+        </span>
+        <span class="brand-text"><b>PaperWeave</b><i>脉络</i></span>
+      </a>
+
+      <p class="nav-label">工作台</p>
+      <nav class="nav" id="mainNav">
+        <a class="nav-item" href="#/overview" data-nav="overview">
+          <span class="nav-ico" data-ico="grid"></span><span class="nav-text">总览</span>
+        </a>
+        <a class="nav-item" href="#/library" data-nav="library">
+          <span class="nav-ico" data-ico="book"></span><span class="nav-text">论文库</span><em class="nav-badge" id="badgePapers">0</em>
+        </a>
+        <a class="nav-item" href="#/progress" data-nav="progress">
+          <span class="nav-ico" data-ico="progress"></span><span class="nav-text">阅读进度</span>
+        </a>
+        <a class="nav-item" href="#/graph" data-nav="graph">
+          <span class="nav-ico" data-ico="graph"></span><span class="nav-text">研究版图</span>
+        </a>
+        <a class="nav-item" href="#/ideas" data-nav="ideas">
+          <span class="nav-ico" data-ico="bulb"></span><span class="nav-text">灵感工坊</span><em class="nav-badge" id="badgeIdeas">0</em>
+        </a>
+      </nav>
+
+      <p class="nav-label">其他</p>
+      <nav class="nav">
+        <a class="nav-item" href="#/settings" data-nav="settings">
+          <span class="nav-ico" data-ico="gear"></span><span class="nav-text">设置</span>
+        </a>
+      </nav>
+
+      <div class="side-spacer"></div>
+
+      <div class="side-note" id="storageNote">
+        <span class="dot"></span>
+        <p>正在连接项目文件…</p>
+      </div>
+
+      <div class="side-profile">
+        <span class="avatar" id="sideAvatar">RL</span>
+        <div class="side-profile-text">
+          <b id="sideName">我的研究档案</b>
+          <small id="sideField">——</small>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <div class="topbar-title">
+          <p id="crumb">工作台 / 总览</p>
+          <h1 id="pageTitle">总览</h1>
+        </div>
+        <div class="topbar-actions">
+          <button class="search-trigger" data-act="palette" title="搜索与命令（Ctrl / ⌘ + K）">
+            <span class="ico" data-ico="search"></span>
+            <span class="search-trigger-label">搜索论文或命令</span>
+            <kbd>Ctrl K</kbd>
+          </button>
+          <button class="btn btn-primary" data-act="new-paper">
+            <span class="ico" data-ico="plus"></span>录入论文
+          </button>
+        </div>
+      </header>
+
+      <main id="view" class="view" aria-live="polite"></main>
+    </div>
+  </div>
+
+  <div id="modalRoot"></div>
+  <div id="toastRoot" class="toast-root" aria-live="polite"></div>
+
+  <script src="js/util.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/similarity.js"></script>
+  <script src="js/ideas.js"></script>
+  <script src="js/graph.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
